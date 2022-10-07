@@ -3,7 +3,7 @@
 #
 cmake_minimum_required (VERSION 3.8)
 
-project ("UE4.26Memo")
+project ("UE-study")
 
 file(GLOB_RECURSE main CONFIGURE_DEPENDS ${CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}/*.h ${CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}/*.cpp)
 

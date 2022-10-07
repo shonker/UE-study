@@ -18,6 +18,9 @@ auto GetEntrySize(bool bIsWide, DWORD length) -> DWORD {
 	}
 	else
 	{
+		PRINTF("%zd", alignof(FNameEntryHeader));
+		PRINTF("%d", FNameEntryAllocator::Stride);
+		PRINTF("%zd", (length + alignof(FNameEntryHeader) + FNameEntryAllocator::Stride - 1) & ~(FNameEntryAllocator::Stride - 1));
 		return (length + alignof(FNameEntryHeader) + FNameEntryAllocator::Stride - 1) & ~(FNameEntryAllocator::Stride - 1);
 	}
 }
@@ -47,7 +50,6 @@ auto GetNameDump() -> void {
 		PrintName(std::string(tmpName));
 		// clearing it out
 		tmpName[length] = 0;
-		std::cout << "[*] the length to skip: " << GetEntrySize(bIsWide, length) << std::endl;
 		// std::cout << "[*] the length to skip: " << sizeof(FNameEntryHeader) + sizeof(char) * length << std::endl;
 
 		// moving to the next entry
