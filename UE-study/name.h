@@ -33,6 +33,7 @@ class FNameEntryAllocator
 {
 public:
 	enum { Stride = alignof(FNameEntryHeader) };
+	enum { BlockSizeBytes = Stride * (1 << 16) };
 	int64_t Lock;
 	int32_t CurrentBlock;
 	int32_t CurrentByCursor;
