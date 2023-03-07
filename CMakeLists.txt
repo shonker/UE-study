@@ -1,9 +1,6 @@
-﻿# CMakeList.txt : CMake project for UEDumper, include source and define
-# project specific logic here.
-#
-cmake_minimum_required (VERSION 3.8)
+﻿cmake_minimum_required (VERSION 3.8)
 
-project ("UE-study")
+project ("uewalker")
 
 file(GLOB_RECURSE main CONFIGURE_DEPENDS ${CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}/*.hpp ${CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}/*.cpp)
 
