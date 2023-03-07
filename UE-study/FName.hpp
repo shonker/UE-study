@@ -2,7 +2,7 @@
 #include <Windows.h>
 #include <string>
 #include <iostream>
-#include "debug.h"
+#include "debug.hpp"
 
 auto printName(std::string str) -> void;
 auto GetExeBase()->uintptr_t;

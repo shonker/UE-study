@@ -1,4 +1,4 @@
-﻿#include "dllmain.h"
+﻿#include "dllmain.hpp"
 
 void Detach()
 {
@@ -8,7 +8,8 @@ void Detach()
 DWORD WINAPI fMain(LPVOID lpParameter)
 {
 	ALLOCCONSOLE();
-	GetNameDump();
+	getObject();
+	//GetNameDump();
 
 	while (true)
 	{

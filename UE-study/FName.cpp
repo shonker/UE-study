@@ -1,4 +1,4 @@
-#include "name.h"
+#include "FName.hpp"
 
 auto PrintName(std::string str) -> void {
 	std::cout << str << '\n';
