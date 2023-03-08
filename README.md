@@ -1,7 +1,13 @@
-# UE4.26Memo
+# uewalker
 
-Just me trying to understand Unreal Engine by writing code and compare the methodology with the data lying on the memory.
+This repo is to dissect and understand how UE-made game is structured.
 
-All credit goes to the interesting blog post in [shh0ya Security Lab](https://shhoya.github.io/ue_dumper.html) because I firstly read it to get the outline of it. Thanks for the greate contents.
+Its unlikely that I'll make this a dumper cuz dumper have to deal with every versions of UE, and occasionally games even modify UE to make it hard to auto-dump.
 
-Code is quite messy I was kinda brain storming while coding so my thinking processes are scattered around the code. Basically identical to the one introduced in the blog post tho.
+Code is quite messy I was kinda brain storming while coding so my thinking processes are scattered around the code.
+
+1. FName retrieval
+2. UObject retrieval
+3. get UProperty and Base
+4. compare those and get full info
+5. profit
