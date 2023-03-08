@@ -8,8 +8,8 @@ void Detach()
 DWORD WINAPI fMain(LPVOID lpParameter)
 {
 	ALLOCCONSOLE();
-	getObject();
-	//GetNameDump();
+	//getObject();
+	getNameDump();
 
 	while (true)
 	{

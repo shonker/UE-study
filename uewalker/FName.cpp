@@ -1,15 +1,12 @@
 #include "FName.hpp"
 
-auto PrintName(std::string str) -> void {
+auto printName(std::string str) -> void {
 	std::cout << str << '\n';
 }
 
-auto GetExeBase() -> uintptr_t {
+auto getExeBase() -> uintptr_t {
 	return reinterpret_cast<uintptr_t>(GetModuleHandle(NULL));
 }
-
-// <sampleeee.exe> + offset == pFNameEntryAllocator
-DWORD offset = 0x630D9D0;
 
 auto GetEntrySize(bool bIsWide, DWORD length) -> DWORD {
 	if (bIsWide)
@@ -22,9 +19,18 @@ auto GetEntrySize(bool bIsWide, DWORD length) -> DWORD {
 	}
 }
 
-auto GetNameDump() -> void {
-	uintptr_t moduleBase = GetExeBase();
-	FNameEntryAllocator* fNameEntryAllocator = reinterpret_cast<FNameEntryAllocator*>(moduleBase + offset);
+auto getFNameEntryAllocator() -> FNameEntryAllocator* {
+	const char* moduleName = "AtomicHeart-Win64-Shipping.exe";
+	auto offset = 0x5;
+	auto address = find_signature(moduleName, "74 09 48 8D 05 ? ? ? ? EB 13") + offset;
+	auto rip_offset = *reinterpret_cast<DWORD*>(address);
+	FNameEntryAllocator* fNameEntryAllocator = reinterpret_cast<FNameEntryAllocator*>(address + sizeof(DWORD) + rip_offset);
+	return fNameEntryAllocator;
+}
+
+auto getNameDump() -> void {
+	uintptr_t moduleBase = getExeBase();
+	FNameEntryAllocator* fNameEntryAllocator = getFNameEntryAllocator();
 
 	for ( short j = 0; j < fNameEntryAllocator->CurrentBlock; ++j ) {
 		char* pFNameEntry = reinterpret_cast<char*>(fNameEntryAllocator->Blocks[j]);
@@ -41,7 +47,7 @@ auto GetNameDump() -> void {
 
 			// skipping 0x2 which is the sizeof Header
 			strncpy(tmpName, pFNameEntry + 0x2, length);
-			PrintName(std::string(tmpName));
+			printName(std::string(tmpName));
 			// clearing it out
 			tmpName[length] = 0;
 

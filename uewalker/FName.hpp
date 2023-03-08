@@ -2,11 +2,12 @@
 #include <Windows.h>
 #include <string>
 #include <iostream>
+#include "findsignature.hpp"
 #include "debug.hpp"
 
 auto printName(std::string str) -> void;
-auto GetExeBase()->uintptr_t;
-auto GetNameDump() -> void;
+auto getExeBase()->uintptr_t;
+auto getNameDump() -> void;
 auto GetEntrySize(bool bIsWide, DWORD length)->DWORD;
 
 class FNameEntryHeader {
