@@ -9,7 +9,7 @@ DWORD WINAPI fMain(LPVOID lpParameter)
 {
 	ALLOCCONSOLE();
 	//getObject();
-	getNameDump();
+	GetNameDump();
 
 	while (true)
 	{

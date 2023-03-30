@@ -1,11 +1,15 @@
 #pragma once
 #include <Windows.h>
-#include "FName.hpp"
+#include <iostream>
 #include "findsignature.hpp"
 
-auto getObject() -> void;
+class FName;
+class FNamePool;
+
+auto GetObjects() -> void;
 
 #define UE_DEPRECATED(Version, Message) [[deprecated(Message " Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.")]]
+
 enum EObjectFlags
 {
 	// Do not add new flags unless they truly belong here. There are alternatives.
@@ -60,17 +64,21 @@ enum EObjectFlags
 	RF_AllocatedInSharedPage	=0x80000000,	///< Allocated from a ref-counted page shared with other UObjects
 };
 
+// This struct is rather from UObjectBase. UObject < UObjectBaseUtility < UObjectBase.
+// I shrink these down to UObject.
 struct UObject {
 	PVOID VTable;
+	/** Flags used to track and report various object states. This needs to be 8 byte aligned on 32-bit
+	    platforms to reduce memory waste */
 	EObjectFlags ObjectFlags;
+	/** Index into GObjectArray */
 	DWORD InternalIndex;
+	/** Class the object belongs to. */
 	UObject* ClassPrivate;
-	void* NamePrivate;
+	/** Name of this object */
+	FName* NamePrivate;
+	/** Object this object resides in. */
 	UObject* OuterPrivate;
-
-	std::string GetFullName(void* NamePoolData);
-	std::string GetNameByIndex(void* NamePoolData, DWORD NameIndex, bool bClass);
-	DWORD GetNameIndex();
 };
 
 struct FUObjectItem {
@@ -94,10 +102,8 @@ typedef struct FChunkedFixedUObjectArray {
 	DWORD MaxChunks;
 	DWORD NumChunks;
 
-	DWORD GetObjectNum();
-	DWORD GetObjectChunk();
-	UObject* GetObjectPtr(DWORD index);
-	BOOLEAN IsValidIndex(int index);
+	FUObjectItem* GetObjectPtr( int32_t Index );
+	bool IsValidIndex( int32_t Index );
 }TUObjectArray;
 
 struct FUObjectArray {
@@ -107,3 +113,4 @@ struct FUObjectArray {
 	BOOLEAN OpenForDisregardForGC;
 	TUObjectArray ObjObjects; // this is not a pointer, so TUObjectArray is just laid out below FUObjectArray seemlessly
 };
+

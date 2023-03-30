@@ -3,17 +3,17 @@
 #include <string>
 #include <iostream>
 #include "findsignature.hpp"
-#include "debug.hpp"
+#include "misc.hpp"
 
-auto printName(std::string str) -> void;
-auto getExeBase()->uintptr_t;
-auto getNameDump() -> void;
+auto PrintName(std::string str) -> void;
+auto GetExeBase()->uintptr_t;
+auto GetNameDump() -> void;
 auto GetEntrySize(bool bIsWide, DWORD length)->DWORD;
 
 class FNameEntryHeader {
 public:
-	USHORT bIsWide : 1;
-	USHORT Len : 15;
+	uint16_t bIsWide : 1;
+	uint16_t Len : 15;
 };
 
 constexpr int NAME_SIZE = 1024;
@@ -41,3 +41,10 @@ public:
 	PVOID Blocks[FNameMaxBlocks];
 };
 
+class FNamePool {
+	FNameEntryAllocator Entries;
+};
+
+class FName {
+	uint32_t ComparisonIndex;
+};

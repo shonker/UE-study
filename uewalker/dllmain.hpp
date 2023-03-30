@@ -3,6 +3,6 @@
 #include <iostream>
 #include <Windows.h>
 #include <Psapi.h>
-#include "debug.hpp"
+#include "misc.hpp"
 #include "FName.hpp"
-#include "GObject.hpp"
+#include "UObject.hpp"
