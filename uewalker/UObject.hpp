@@ -2,8 +2,8 @@
 #include <Windows.h>
 #include <iostream>
 #include "findsignature.hpp"
+#include "FName.hpp"
 
-class FName;
 class FNamePool;
 
 auto GetObjects() -> void;
@@ -74,11 +74,14 @@ struct UObject {
 	/** Index into GObjectArray */
 	DWORD InternalIndex;
 	/** Class the object belongs to. */
+	// It's typed as UClass* in UE source but UObject is on top of its inheritance tree so fine with UObject*.
 	UObject* ClassPrivate;
 	/** Name of this object */
-	FName* NamePrivate;
+	FName NamePrivate;
 	/** Object this object resides in. */
 	UObject* OuterPrivate;
+
+	auto GetFullName();
 };
 
 struct FUObjectItem {
@@ -104,7 +107,7 @@ typedef struct FChunkedFixedUObjectArray {
 
 	FUObjectItem* GetObjectPtr( int32_t Index );
 	bool IsValidIndex( int32_t Index );
-}TUObjectArray;
+} TUObjectArray;
 
 struct FUObjectArray {
 	DWORD ObjFirstGCIndex;

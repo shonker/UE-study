@@ -48,7 +48,7 @@ auto GetNameDump() -> void {
 
 			// skipping 0x2 which is the sizeof Header
 			strncpy(tmpName, pFNameEntry + 0x2, length);
-			PrintName(std::string(tmpName));
+			// PrintName(std::string(tmpName));
 			// clearing it out
 			tmpName[length] = 0;
 

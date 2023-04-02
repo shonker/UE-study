@@ -41,10 +41,10 @@ public:
 	PVOID Blocks[FNameMaxBlocks];
 };
 
-class FNamePool {
+struct FNamePool {
 	FNameEntryAllocator Entries;
 };
 
-class FName {
+struct FName {
 	uint32_t ComparisonIndex;
 };
