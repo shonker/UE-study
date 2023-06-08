@@ -4,8 +4,6 @@
 #include "findsignature.hpp"
 #include "FName.hpp"
 
-class FNamePool;
-
 auto GetObjects() -> void;
 
 #define UE_DEPRECATED(Version, Message) [[deprecated(Message " Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.")]]
@@ -70,9 +68,9 @@ struct UObject {
 	PVOID VTable;
 	/** Flags used to track and report various object states. This needs to be 8 byte aligned on 32-bit
 	    platforms to reduce memory waste */
-	EObjectFlags ObjectFlags;
+	EObjectFlags ObjectFlags; //4 byte
 	/** Index into GObjectArray */
-	DWORD InternalIndex;
+	DWORD InternalIndex; //4byte
 	/** Class the object belongs to. */
 	// It's typed as UClass* in UE source but UObject is on top of its inheritance tree so fine with UObject*.
 	UObject* ClassPrivate;

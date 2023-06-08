@@ -3,9 +3,9 @@
 using namespace std;
 
 auto GetTUObjectArray() -> TUObjectArray {
-	const char* moduleName = "AtomicHeart-Win64-Shipping.exe";
+	const char* moduleName = "HogwartsLegacy.exe";
 	auto offset = 0x2;
-	auto address = find_signature( moduleName, "89 15 ? ? ? ? 85 FF" ) + offset;
+	auto address = find_signature( moduleName, "89 15 ? ? ? ? 85 FF 7F 1D 4C 8D 05 ? ? ? ? BA ? ? ? ?" ) + offset;
 	auto rip_offset = *reinterpret_cast< DWORD* >( address );
 	FUObjectArray* fUObjectArray = reinterpret_cast< FUObjectArray* >( address + sizeof( DWORD ) + rip_offset );
 	cout << "fUObjectArray: " << hex << (uintptr_t)fUObjectArray << endl;
@@ -27,11 +27,16 @@ FORCEINLINE auto FChunkedFixedUObjectArray::IsValidIndex( int32_t Index ) -> boo
 	return Index < NumElements && Index >= 0;
 }
 
+// UnrealNames.cpp -> ToString() -> GetDiplayNameEntry() -> GetNamePool() -> Resolve(FNameEntryHandle Handle)
+auto GetName() -> void {
+
+}
+
 auto UObject::GetFullName() {
 	UObject* ClassObj = this->ClassPrivate;
 	UObject* OuterObj = this->OuterPrivate;
-	DWORD NameIndex = ClassObj->NamePrivate.ComparisonIndex;
-	cout << "NameIndex: " << NameIndex << endl;
+	uint32_t NameIndex = ClassObj->NamePrivate.ComparisonIndex;
+    auto a = FNameEntryHandle(NameIndex);
 }
 
 auto GetObjects() -> void {

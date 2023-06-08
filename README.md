@@ -25,5 +25,5 @@ format
 - UObject: `Engine\Source\Runtime\CoreUObject\Public\UObject\Object.h`
 - UObjectBaseUtility(GetFullName): `Engine\Source\Runtime\CoreUObject\Public\UObject\UObjectBaseUtility.h`, `\Private\UObject\UObjectBaseUtility.h`
 - FName(FNameEntry, FNameEntryHeader): `Engine\Source\Runtime\Core\Public\UObject\NameTypes.h`
-- FNameEntryAllocator: `Engine\Source\Runtime\Core\Private\UObject\UnrealNames.cpp`
+- FNameEntryAllocator(FName::ToString): `Engine\Source\Runtime\Core\Private\UObject\UnrealNames.cpp`
 - UEnum(GetNameByIndex): `Engine\Source\Runtime\CoreUObject\Public\UObject\Class.h`, `Engine\Source\Runtime\CoreUObject\Private\UObject\Enum.cpp`

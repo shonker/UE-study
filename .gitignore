@@ -1,3 +1,5 @@
 .vs/
 out/
 CMakePresets.json
+.idea/
+cmake-build-debug-visual-studio/

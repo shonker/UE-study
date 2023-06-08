@@ -6,7 +6,6 @@
 #include "misc.hpp"
 
 auto PrintName(std::string str) -> void;
-auto GetExeBase()->uintptr_t;
 auto GetNameDump() -> void;
 auto GetEntrySize(bool bIsWide, DWORD length)->DWORD;
 
@@ -45,6 +44,19 @@ struct FNamePool {
 	FNameEntryAllocator Entries;
 };
 
+// Unpacked ComparisonIndex
+struct FNameEntryHandle
+{
+    uint32_t Block = 0;
+    uint32_t Offset = 0;
+
+    FNameEntryHandle(uint32_t Index)
+            : Block(Index >> 0x10)
+            , Offset(Index & 0xFFFF)
+    {}
+};
+
 struct FName {
 	uint32_t ComparisonIndex;
+	uint32_t DIsplayIndex;
 };
